@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a111b">
+  <meta name="description" content="선택이 쌓이는 진로 실험실. 고등학교에서 첫 일자리까지, 다른 가능성을 만나보세요.">
+  <title>다음 장 · 진로 실험실</title>
+
+  <!-- =================================================================
+       스타일시트 (CSS) - 디자인 및 UI 스타일
+       ※ 디자이너/퍼블리셔 작업 영역 (css/ 폴더)
+       ※ 브라우저 렌더링 및 캐스케이딩(우선순위) 규칙에 따라 순서대로 로드됩니다.
+       ================================================================= -->
+  <!-- 1. 기본 테마, 컬러 시스템, 타이포그래피, 베이스 레이아웃 -->
+  <link rel="stylesheet" href="css/theme-v3.css">
+  <!-- 2. 반응형 2컬럼 레이아웃 및 저널 패널 스타일 -->
+  <link rel="stylesheet" href="css/journal-v4.css">
+  <!-- 3. v6 다크 테마 변수 및 공통 컴포넌트 스타일 -->
+  <link rel="stylesheet" href="css/experience-v6.css">
+  <!-- 4. 여정(타임라인) 패널 및 상태 표시 UI -->
+  <link rel="stylesheet" href="css/experience-v7.css">
+  <!-- 5. 아바타 프로필, 에디터 및 재화(자산) 피드백 -->
+  <link rel="stylesheet" href="css/experience-v8.css">
+  <!-- 6. 상단 고정 플로팅 바 및 저널 페이징 UI -->
+  <link rel="stylesheet" href="css/experience-v13.css">
+  <!-- 7. 수강신청 패널 및 과목 순서 안내 스타일 -->
+  <link rel="stylesheet" href="css/registration-v9.css">
+</head>
+<body>
+  <!-- 상단 내비게이션 바 -->
+  <header class="top">
+    <a href="./" class="brand"><span>↗</span> 다음 장 <small>진로 실험실</small></a>
+    <div>
+      <button data-action="help">이용 안내</button>
+      <button data-action="history">이전 플레이 기록</button>
+      <button data-action="restart">새로 시작 ↗</button>
+    </div>
+  </header>
+
+  <!-- 메인 레이아웃: 사이드바 + 메인 콘텐츠 -->
+  <div class="layout">
+    <aside id="sidebar"></aside>
+    <main>
+      <!-- 여정 요약 패널 -->
+      <section id="journey" class="panel journey"></section>
+
+      <!-- 탭 메뉴 (나의 이야기 / 활동 신청·자산 관리) -->
+      <nav class="tabs" aria-label="게임 메뉴">
+        <button data-action="tab" data-value="story">나의 이야기</button>
+        <button data-action="tab" data-value="shop">활동 신청·자산 관리</button>
+      </nav>
+
+      <!-- 핵심 진행 콘텐츠 영역 (선택지 및 이벤트) -->
+      <div id="content"></div>
+
+      <!-- 기록 저널 패널 -->
+      <section id="journal" class="panel journal"></section>
+
+      <!-- 준비도 현황 패널 -->
+      <section id="readiness" class="panel readiness"></section>
+
+      <!-- 직업 지도 및 상세 정보 패널 -->
+      <section id="careerSection" aria-label="직업 지도"></section>
+
+      <!-- 푸터 -->
+      <footer>
+        교육용 시뮬레이션 · 학과 정보는 어디가 공개 자료를 참고했습니다. 대학 표시명·도서·합격 기준·활동 혜택·연봉 제안은 게임 설정입니다.<br>
+        현재 선택이 실제 진학이나 직업의 성공을 예측하지 않습니다. 기록은 이 브라우저에만 저장됩니다.
+      </footer>
+    </main>
+  </div>
+
+  <!-- 사건 선택 팝업 모달 -->
+  <dialog id="choiceDialog" class="choice-dialog" aria-label="사건 선택">
+    <div class="choice-dialog-toolbar">
+      <span>선택과 결과를 확인하는 동안 시간은 멈춰요.</span>
+      <button data-action="hideDecision">기록 살펴보기 ↓</button>
+    </div>
+    <div id="choiceNotice" role="alert"></div>
+    <div id="choiceContent"></div>
+  </dialog>
+
+  <!-- 토스트 알림 메시지 -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- 공통 안내 및 팝업 모달 -->
+  <dialog id="dialog">
+    <button class="close" data-action="close" aria-label="닫기">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <!-- 학기 전환 및 회복 모달 -->
+  <dialog id="periodDialog" aria-label="학기 전환과 회복 안내" aria-modal="true">
+    <div id="periodContent"></div>
+  </dialog>
+
+  <!-- =================================================================
+       스크립트 (JavaScript) - 프로세스 및 데이터
+       ※ 개발자/기획자 작업 영역 (js/ 폴더)
+       ※ 중요: 이 프로젝트는 기본 엔진(v3) 위에 상위 버전이 기능을 단계적으로
+         확장(Monkey-patching)하는 구조이므로, 반드시 아래 순서대로 로드되어야 합니다.
+       ================================================================= -->
+
+  <!-- [단계 1] 기본 게임 데이터셋 및 텍스트 리소스 -->
+  <script src="js/content-v3.js"></script>
+  <script src="js/daily-choices.js"></script>
+  <script src="js/quiz-v3.js"></script>
+  <script src="js/events-v3.js"></script>
+  <script src="js/majors-v4.js"></script>
+  <script src="js/journal-v4.js"></script>
+  <script src="js/curriculum-v5.js"></script>
+  <script src="js/careers-v5.js"></script>
+  <script src="js/copy-v5.js"></script>
+
+  <!-- [단계 2] 코어 게임 엔진 (상태 관리, 로컬 스토리지, 기본 렌더링) -->
+  <script src="js/game-v3.js"></script>
+
+  <!-- [단계 3] 기능 확장 및 시스템 패치 레이어 (v6 ~ v13 순차 적용) -->
+  <!-- v6: 신규 직업, 추가 퀴즈, 렌더링 파이프라인 1차 확장 -->
+  <script src="js/experience-v6.js"></script>
+  <!-- v7: 15개 계열별 역할 데이터셋 및 전용 사건 카탈로그 -->
+  <script src="js/role-events-v7.js"></script>
+  <!-- v7: 역할 선택 시스템, 실시간 시계, 여정 타임라인 패치 -->
+  <script src="js/experience-v7.js"></script>
+  <!-- v8: 어디가 공개자료 기반 실제 대학/학과 및 아바타/재화 데이터 -->
+  <script src="js/data-v8.js"></script>
+  <!-- v8: 자산/현금 시스템, 아바타 커스텀 에디터, 학점 감사 패치 -->
+  <script src="js/experience-v8.js"></script>
+  <!-- v9: 수강신청 과목 이수 순서 체계 및 플래너 패치 -->
+  <script src="js/registration-v9.js"></script>
+  <!-- v10~v11: 커리어넷 공공데이터 직업 프로필 연동 (1단계, 2단계) -->
+  <script src="js/careers-v10.js"></script>
+  <script src="js/careers-v11.js"></script>
+  <!-- v12: 75개 직업 커리어넷 공식 상세 데이터셋 (JSON) -->
+  <script src="js/career-source-v12.js"></script>
+  <!-- v12: 공식 데이터 기반 최종 직업 상세 렌더러 오버라이드 -->
+  <script src="js/careers-v12.js"></script>
+  <!-- v13: 저널 아카이브 페이징, 지출 이벤트 등 최신 인터랙션 최종 패치 -->
+  <script src="js/experience-v13.js"></script>
+</body>
+</html>

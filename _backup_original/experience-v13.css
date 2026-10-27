@@ -1,0 +1,6 @@
+.course-float{position:sticky;top:0;z-index:5;display:grid;gap:4px;margin:12px 0;padding:10px 14px;border:1px solid #62b8c7;border-radius:12px;background:#102935;box-shadow:0 8px 24px #06121ec9}
+.course-float>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px}
+.course-float strong{color:#b3f6ef}.course-float span{color:#ffdeaa}.course-float p{margin:0;font-size:.9rem}.course-float small{color:#a9bfcc;line-height:1.4}
+.journal-archive{padding:8px 4px}.journal-archive .life-card{margin:10px 0}.archive-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0}
+.choice[disabled]{opacity:.52;cursor:not-allowed}
+@media(max-width:650px){.course-float{top:0;padding:8px 10px}.course-float p,.course-float small{font-size:.76rem}}
