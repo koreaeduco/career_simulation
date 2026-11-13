@@ -1,0 +1,703 @@
+/* v15: 다크 모드 ON/OFF 스위치 · 라이트 모드 색상 · 생활·회복 4열 카드와 떠다니는 아이콘 */
+
+/* ───────── 다크 모드 ON/OFF 스위치 (상단 바) ───────── */
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ts-label {
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.theme-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ts-track {
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+  width: 86px;
+  height: 38px;
+  border-radius: 999px;
+  border: 2px solid #ffffff55;
+  background: linear-gradient(135deg, #2fd0b6, #1d8f94);
+  box-shadow: inset 0 2px 6px #0006, 0 0 0 0 #5bdac788;
+  transition: background .3s, border-color .3s;
+  animation: ts-pulse 2.6s ease-in-out infinite;
+}
+
+.ts-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  color: #fff;
+  text-shadow: 0 1px 2px #0005;
+  transition: opacity .2s;
+}
+
+.ts-on {
+  left: 14px;
+}
+
+.ts-off {
+  right: 12px;
+  opacity: 0;
+}
+
+.ts-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #0f1d2b;
+  box-shadow: 0 2px 6px #0007;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  transform: translateX(48px);
+  transition: transform .32s cubic-bezier(.3, 1.4, .5, 1), background .3s;
+}
+
+.ts-sun {
+  display: none;
+}
+
+/* OFF = 라이트 모드 */
+.theme-switch input:not(:checked) + .ts-track {
+  background: linear-gradient(135deg, #ffd45c, #f4a62a);
+  border-color: #b9770e66;
+  box-shadow: inset 0 2px 6px #7a4a0033, 0 0 0 0 #f4a62a88;
+}
+
+.theme-switch input:not(:checked) + .ts-track .ts-on {
+  opacity: 0;
+}
+
+.theme-switch input:not(:checked) + .ts-track .ts-off {
+  opacity: 1;
+  color: #5a3600;
+  text-shadow: none;
+}
+
+.theme-switch input:not(:checked) + .ts-track .ts-knob {
+  transform: translateX(0);
+  background: #fffdf2;
+}
+
+.theme-switch input:not(:checked) + .ts-track .ts-moon {
+  display: none;
+}
+
+.theme-switch input:not(:checked) + .ts-track .ts-sun {
+  display: block;
+}
+
+.theme-switch input:focus-visible + .ts-track {
+  outline: 3px solid #f7d372;
+  outline-offset: 3px;
+}
+
+.theme-switch:hover .ts-track {
+  filter: brightness(1.08);
+}
+
+@keyframes ts-pulse {
+  0%, 100% {
+    box-shadow: inset 0 2px 6px #0006, 0 0 0 0 #5bdac755;
+  }
+  50% {
+    box-shadow: inset 0 2px 6px #0006, 0 0 0 6px #5bdac700;
+  }
+}
+
+html[data-theme="light"] .ts-label {
+  color: #243c3c;
+}
+
+@media(max-width:650px) {
+  .theme-switch {
+    margin: 0 4px 0 0;
+    gap: 6px;
+  }
+  .ts-label {
+    display: none;
+  }
+  .ts-track {
+    width: 72px;
+    height: 34px;
+  }
+  .ts-knob {
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+    transform: translateX(38px);
+  }
+}
+
+/* ───────── 생활·회복: 4열 카드 + 떠다니는 아이콘 ───────── */
+.shop-grid.recovery-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.recovery-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 16px 12px;
+}
+
+.recovery-item h3 {
+  margin: 4px 0 6px;
+}
+
+.recovery-item p {
+  margin: 0 0 8px;
+}
+
+.recovery-item b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.recovery-item button {
+  margin-top: auto;
+  width: 100%;
+}
+
+.food-float {
+  position: relative;
+  height: 84px;
+  margin-bottom: 6px;
+  display: grid;
+  place-items: center;
+}
+
+.food-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  font-size: 34px;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  background: radial-gradient(circle at 35% 30%, #ffffff40, #ffffff10 70%);
+  box-shadow: inset 0 0 0 1px #ffffff2e;
+  animation: food-bob 3s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.food-shadow {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 40px;
+  height: 7px;
+  margin-left: -20px;
+  border-radius: 50%;
+  background: #00000055;
+  animation: food-shadow 3s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.recovery-item:hover .food-icon {
+  animation-duration: 1.6s;
+}
+
+@keyframes food-bob {
+  0%, 100% {
+    transform: translateY(2px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(4deg);
+  }
+}
+
+@keyframes food-shadow {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: .9;
+  }
+  50% {
+    transform: scaleX(.62);
+    opacity: .45;
+  }
+}
+
+@media(max-width:1100px) {
+  .shop-grid.recovery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.reduce-motion .food-icon, .reduce-motion .food-shadow {
+  animation: none;
+}
+
+/* ───────── 라이트 모드 (스위치 OFF) ─────────
+   기본(다크) 색은 experience-v6~v14.css 에 직접 적혀 있어서, 같은 규칙들을 밝은 색으로 다시 덮어씁니다. */
+html[data-theme="light"] {
+  --paper: #f7f5ee;
+  --white: #fffef9;
+  --ink: #243c3c;
+  --muted: #5a6e6b;
+  --line: #d3dccd;
+  --mint: #3f9f87;
+  --mintlight: #e8f3e7;
+  --coral: #bd6652;
+  --yellow: #fae5a5;
+  --blue: #d9e9f1;
+  --lilac: #e6dff3;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="light"] a {
+  color: #1f6f9a;
+}
+
+html[data-theme="light"] button,
+html[data-theme="light"] select,
+html[data-theme="light"] input {
+  background: #fffef9;
+}
+
+html[data-theme="light"] button:hover:not(:disabled),
+html[data-theme="light"] .choice:hover:not(:disabled),
+html[data-theme="light"] .subject:hover:not(:disabled) {
+  background: #edf4e9;
+  border-color: var(--mint);
+}
+
+html[data-theme="light"] button:focus-visible,
+html[data-theme="light"] a:focus-visible,
+html[data-theme="light"] input:focus-visible,
+html[data-theme="light"] select:focus-visible {
+  outline-color: #24736b;
+}
+
+html[data-theme="light"] .primary {
+  background: #2f8f7c;
+  border-color: #2f8f7c;
+  color: #fff;
+}
+
+html[data-theme="light"] .primary:hover:not(:disabled) {
+  background: #247564;
+  color: #fff;
+}
+
+html[data-theme="light"] .speed,
+html[data-theme="light"] .meter,
+html[data-theme="light"] .progress,
+html[data-theme="light"] .notice,
+html[data-theme="light"] .note,
+html[data-theme="light"] .waiting,
+html[data-theme="light"] .requirements,
+html[data-theme="light"] .asset-summary,
+html[data-theme="light"] .tasks,
+html[data-theme="light"] .two-col>div,
+html[data-theme="light"] .empty-journal,
+html[data-theme="light"] .decision-prompt,
+html[data-theme="light"] .course-audit,
+html[data-theme="light"] .readiness,
+html[data-theme="light"] .result-changes {
+  background: #eef3ea;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+html[data-theme="light"] .speed button.active,
+html[data-theme="light"] .term-slot.active {
+  background: #2f8f7c;
+  color: #fff;
+}
+
+html[data-theme="light"] .pill,
+html[data-theme="light"] .badge,
+html[data-theme="light"] .chips span {
+  background: #e1efe3;
+  color: #24574b;
+}
+
+html[data-theme="light"] .badge {
+  background: #f5e6a8;
+  color: #5c4410;
+}
+
+html[data-theme="light"] .readiness {
+  border-color: #8cbfa9;
+}
+
+html[data-theme="light"] .ready-row.current {
+  background: #e3f1e5;
+}
+
+html[data-theme="light"] .ready-row b,
+html[data-theme="light"] .salary,
+html[data-theme="light"] .tabs .active {
+  color: #1f7a66;
+}
+
+html[data-theme="light"] .ready-row small,
+html[data-theme="light"] .readiness .pill {
+  background: #d3e8dc;
+  color: #24574b;
+}
+
+html[data-theme="light"] .journey {
+  background: var(--white);
+}
+
+html[data-theme="light"] .tabs .active {
+  border-bottom-color: #2f8f7c;
+}
+
+html[data-theme="light"] .tabs button {
+  color: #50635f;
+}
+
+html[data-theme="light"] .choice small {
+  color: #4a5e5b;
+}
+
+html[data-theme="light"] .choice em {
+  color: #53675f;
+}
+
+html[data-theme="light"] .choice>b {
+  color: #2f8f7c;
+}
+
+html[data-theme="light"] .choice small b,
+html[data-theme="light"] .credit-grid b {
+  color: #1f7a66;
+}
+
+html[data-theme="light"] .field-grid .choice:nth-child(n) {
+  background: #f6f9f1;
+}
+
+html[data-theme="light"] .field-grid .choice:hover {
+  background: #e6f1e0;
+}
+
+html[data-theme="light"] .effect.gain,
+html[data-theme="light"] .stat-delta.gain {
+  background: #dcecf7;
+  color: #1f5f8a;
+}
+
+html[data-theme="light"] .effect.loss,
+html[data-theme="light"] .stat-delta.loss {
+  background: #fbe1dc;
+  color: #9a3f33;
+}
+
+html[data-theme="light"] .choice:disabled::after {
+  color: #a8473a;
+}
+
+html[data-theme="light"] .term-slot:disabled:hover,
+html[data-theme="light"] .filter-label select {
+  background: #fffef9;
+  color: var(--ink);
+}
+
+html[data-theme="light"] .career.locked {
+  background: #eceee6;
+  color: var(--muted);
+}
+
+html[data-theme="light"] .plus {
+  color: #1f5f8a;
+}
+
+html[data-theme="light"] .minus {
+  color: #a8473a;
+}
+
+html[data-theme="light"] .eyebrow {
+  color: #4f7f6f;
+}
+
+html[data-theme="light"] .subject.selected,
+html[data-theme="light"] .major-option.selected,
+html[data-theme="light"] .area.met {
+  background: #e4f2e0;
+  border-color: #53866b;
+}
+
+html[data-theme="light"] .area.missing {
+  background: #fff0e8;
+  border-color: #c0745a;
+}
+
+html[data-theme="light"] .outcome.success {
+  background: #e3f2df;
+  color: #305e36;
+}
+
+html[data-theme="light"] .outcome.failure {
+  background: #fbe7df;
+  color: #8e4538;
+}
+
+html[data-theme="light"] .life-card.choice,
+html[data-theme="light"] .log.choice {
+  background: #eaf4ec;
+}
+
+html[data-theme="light"] .life-card.setback,
+html[data-theme="light"] .log.setback {
+  background: #f8e9e4;
+}
+
+html[data-theme="light"] .life-card.achievement,
+html[data-theme="light"] .log.achievement {
+  background: #f6f3d8;
+}
+
+html[data-theme="light"] .life-card:first-child {
+  background: #eef6ea;
+  border-color: #bdd1af;
+}
+
+html[data-theme="light"] .decision-prompt {
+  background: #ecf4e4;
+  border-color: #c9d8bb;
+}
+
+html[data-theme="light"] .choice-dialog::backdrop,
+html[data-theme="light"] dialog::backdrop {
+  background: #21362c99;
+}
+
+html[data-theme="light"] .choice-dialog {
+  background: var(--white);
+}
+
+html[data-theme="light"] .recovery-notice {
+  border-color: #d8b46f;
+  background: #fbf0d8;
+}
+
+html[data-theme="light"] .timetable section {
+  background: #f1f5ec;
+}
+
+html[data-theme="light"] .term-slot.filled {
+  border-color: #53866b;
+}
+
+html[data-theme="light"] .subject-grid .subject small {
+  color: #55685f;
+}
+
+/* v7 */
+html[data-theme="light"] #flowStatus {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .welcome {
+  background: linear-gradient(135deg, #eef6e8, #f8f5e8);
+  border-color: #c9d9bf;
+}
+
+html[data-theme="light"] .welcome h1 span {
+  color: #2a7f6a;
+}
+
+html[data-theme="light"] .welcome-lead {
+  color: #3f5552;
+}
+
+html[data-theme="light"] .welcome-route span {
+  background: #e4efe3;
+  border-color: #c5d6c3;
+}
+
+html[data-theme="light"] .welcome-goals span {
+  color: #50635f;
+}
+
+html[data-theme="light"] .fixed-courses {
+  background: #eef2ec;
+  border-left-color: #8fa39a;
+}
+
+html[data-theme="light"] .fixed-courses small,
+html[data-theme="light"] .course-item p {
+  color: #55665f;
+}
+
+html[data-theme="light"] .course-item button.selected {
+  background: #dff0e6;
+  border-color: #53866b;
+}
+
+html[data-theme="light"] .role-growth {
+  background: #eaf3ee;
+  border-color: #b8d3c6;
+}
+
+/* v8 */
+html[data-theme="light"] .avatar-editor {
+  background: #f3f6ee;
+  border-color: var(--line);
+}
+
+html[data-theme="light"] .avatar-editor input {
+  color: var(--ink);
+  background: #fff;
+  border-color: #b9c9b5;
+}
+
+html[data-theme="light"] .shop-sections .active,
+html[data-theme="light"] .avatar-controls .active {
+  border-color: #53866b;
+  background: #dff0e6;
+}
+
+html[data-theme="light"] .credit-plan {
+  border-color: #b8c8b6;
+  background: #f3f6ee;
+}
+
+html[data-theme="light"] .credit-grid>div {
+  background: #fff;
+}
+
+html[data-theme="light"] .game-profile {
+  background: #f5f0dd;
+}
+
+html[data-theme="light"] .game-profile b {
+  color: #8a6a1c;
+}
+
+html[data-theme="light"] .uni .chips span {
+  background: #e8efe4;
+}
+
+html[data-theme="light"] .cash-change {
+  border-color: #9bbbd0;
+}
+
+html[data-theme="light"] #periodDialog {
+  border-color: #7bbfa8;
+  background: #f3f8f1;
+  color: var(--ink);
+}
+
+html[data-theme="light"] #periodDialog::backdrop {
+  background: #21362cc0;
+}
+
+html[data-theme="light"] .milestone .eyebrow {
+  color: #2a7f6a;
+}
+
+html[data-theme="light"] .milestone.recovery {
+  background: #f8efdc;
+}
+
+html[data-theme="light"] .milestone-stats span {
+  border-color: #b8cfc6;
+}
+
+/* v9 · v13 */
+html[data-theme="light"] .order-panel {
+  border-color: #b3c7b0;
+  background: #eef3ea;
+}
+
+html[data-theme="light"] .order-message {
+  background: #fbf3df;
+}
+
+html[data-theme="light"] .order-message.required {
+  background: #fde8e8;
+  border-color: #d9707e;
+}
+
+html[data-theme="light"] .order-message strong {
+  color: #8a5a1a;
+}
+
+html[data-theme="light"] .order-message.required strong {
+  color: #a8334a;
+}
+
+html[data-theme="light"] .course-float {
+  border-color: #7fb5a6;
+  background: #f2f8f1;
+  box-shadow: 0 8px 24px #2a3b3322;
+}
+
+html[data-theme="light"] .course-float strong {
+  color: #1f7a66;
+}
+
+html[data-theme="light"] .course-float span {
+  color: #8a5a1a;
+}
+
+html[data-theme="light"] .course-float small {
+  color: #55665f;
+}
+
+/* v14 */
+html[data-theme="light"] .hair-preview,
+html[data-theme="light"] .eye-preview {
+  background: #dfe9ee;
+}
+
+html[data-theme="light"] .avatar-thumb {
+  background: radial-gradient(circle at 50% 35%, #f4fafc, #d4e3ea 75%);
+}
+
+html[data-theme="light"] .avatar-controls .dot {
+  border-color: #00000033;
+}
+
+html[data-theme="light"] .avatar-item.on {
+  border-color: #2f8f7c;
+  box-shadow: 0 0 0 1px #2f8f7c inset;
+}
+
+html[data-theme="light"] .food-icon {
+  background: radial-gradient(circle at 35% 30%, #ffffff, #f1efe2 75%);
+  box-shadow: inset 0 0 0 1px #00000014;
+}
+
+html[data-theme="light"] .food-shadow {
+  background: #24323a33;
+}

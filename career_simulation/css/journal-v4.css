@@ -1,0 +1,343 @@
+.layout {
+  grid-template-columns: 220px minmax(0,1fr);
+  max-width: 1250px;
+}
+
+.journal {
+  position: static;
+  max-height: none;
+  overflow: visible;
+  padding: 26px;
+}
+
+.journal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.journal-heading h1 {
+  font-size: 26px;
+  margin: 0;
+}
+
+.journal-heading button {
+  font-size: 12px;
+}
+
+.journal-description {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 8px 0 22px;
+}
+
+.life-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: var(--white);
+}
+
+.life-card h2 {
+  font-size: 20px;
+  margin: 14px 0 9px;
+}
+
+.life-card p {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.9;
+}
+
+.life-card time {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.life-card.setback {
+  border-left: 4px solid #c4826d;
+}
+
+.life-card.achievement {
+  border-left: 4px solid #a8af58;
+}
+
+.life-card.choice {
+  display: block;
+  width: auto;
+  box-shadow: none;
+  border-left: 4px solid #6eaa8b;
+}
+
+.life-card:first-child {
+  background: #f4f8ed;
+  border-color: #bdd1af;
+}
+
+.decision-prompt {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #c9d8bb;
+  background: #ecf4e4;
+  padding: 17px 20px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.decision-prompt .primary {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.empty-journal {
+  padding: 42px 12px;
+  text-align: center;
+  color: var(--muted);
+  background: #f5f5ed;
+  border-radius: 10px;
+}
+
+.more-records {
+  width: 100%;
+}
+
+#careerSection {
+  scroll-margin-top: 150px;
+}
+
+.choice-dialog {
+  width: min(880px,calc(100% - 26px));
+  padding: 24px;
+  max-height: 90vh;
+}
+
+.choice-dialog>.choice-dialog-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.choice-dialog-toolbar span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.choice-dialog-toolbar button {
+  font-size: 12px;
+}
+
+.choice-dialog .story-card {
+  border: 0;
+  box-shadow: none;
+  padding: 7px;
+  margin: 0;
+  min-height: 0;
+}
+
+.choice-dialog::backdrop {
+  background: #21362c55;
+  backdrop-filter: blur(1px);
+}
+
+.choice-dialog .scene {
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.major-options {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.major-option {
+  text-align: left;
+  padding: 14px;
+}
+
+.major-option strong, .major-option small {
+  display: block;
+}
+
+.major-option small {
+  font-size: 11px;
+  margin-top: 7px;
+}
+
+.major-option.selected {
+  border: 2px solid #53866b;
+  background: #eef6e8;
+}
+
+.outcome {
+  padding: 14px 17px;
+  border-radius: 9px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.outcome.success {
+  background: #e3f2df;
+  color: #305e36;
+}
+
+.outcome.failure {
+  background: #fbe7df;
+  color: #8e4538;
+}
+
+.readiness {
+  margin-top: 18px;
+}
+
+#choiceContent .field-grid {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+
+@media(max-width:760px) {
+  .layout {
+    display: flex;
+  }
+  .journal {
+    padding: 19px 15px;
+  }
+  .journal-heading h1 {
+    font-size: 23px;
+  }
+  .life-card {
+    padding: 17px 14px;
+  }
+  .life-card h2 {
+    font-size: 18px;
+  }
+  .life-card p {
+    font-size: 13px;
+  }
+  .decision-prompt {
+    padding: 14px;
+    align-items: flex-start;
+  }
+  .decision-prompt strong {
+    font-size: 13px;
+  }
+  .decision-prompt button {
+    font-size: 12px;
+    padding: 9px 11px;
+  }
+  .choice-dialog {
+    padding: 15px;
+    max-height: 92vh;
+  }
+  .major-options {
+    grid-template-columns: 1fr;
+  }
+  .major-option {
+    padding: 12px;
+  }
+  #choiceContent .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .choice-dialog .university-grid {
+    grid-template-columns: 1fr;
+  }
+  .readiness {
+    margin-top: 12px;
+  }
+}
+
+/* Course preparation is a separate, persistent admission requirement. */
+.course-audit {
+  margin: 18px 0;
+  padding: 18px;
+  border: 2px solid #668b65;
+  border-radius: 14px;
+  background: #f3f7ee;
+}
+
+.area-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+}
+
+.area {
+  padding: 12px;
+  border-radius: 9px;
+  background: #fff;
+  border: 1px solid #d6dfcf;
+}
+
+.area.missing {
+  border-color: #b76c4c;
+  background: #fff4ed;
+}
+
+.area.met {
+  border-color: #678766;
+  background: #edf5e8;
+}
+
+.area p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+
+.bridge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 14px 0;
+  border-top: 1px solid #d6dfcf;
+}
+
+.bridge-row strong {
+  width: 100%;
+}
+
+button.subject {
+  text-align: left;
+  align-items: flex-start;
+  color: inherit;
+  font: inherit;
+}
+
+.subject.selected {
+  outline: 2px solid #51794e;
+  background: #edf5e8;
+}
+
+details {
+  margin: 12px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+details p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media(max-width:650px) {
+  .area-grid {
+    grid-template-columns: 1fr;
+  }
+  .course-audit {
+    padding: 12px;
+  }
+  .bridge-row button {
+    width: 100%;
+  }
+}

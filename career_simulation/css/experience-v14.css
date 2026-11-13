@@ -1,0 +1,302 @@
+/* v14: 아바타 꾸미기 확장(눈 모양·의상·효과) + 직업 아이콘 스타일 */
+
+/* ───────── 아바타 크기 (viewBox가 64x80으로 커져 비율을 맞춤) ───────── */
+.avatar-pixel {
+  width: 112px;
+  height: 140px;
+  overflow: visible;
+}
+
+.avatar-pixel.thumb {
+  width: 84px;
+  height: 105px;
+  animation: none;
+}
+
+.avatar-preview .avatar-pixel {
+  flex: 0 0 auto;
+}
+
+/* ───────── 반짝이·떠다니는 효과 ───────── */
+.av-tw {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: av-twinkle 2.2s ease-in-out infinite;
+}
+
+.av-float {
+  animation: av-float 3s ease-in-out infinite;
+}
+
+/* 배경 속 구름·물결이 좌우로 천천히 흘러가요 */
+.av-drift {
+  animation: av-drift 7s ease-in-out infinite alternate;
+}
+
+@keyframes av-drift {
+  from {
+    transform: translateX(-2px);
+  }
+  to {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes av-twinkle {
+  0%, 100% {
+    opacity: .25;
+    transform: scale(.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes av-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* ───────── 아바타 편집기 ───────── */
+.avatar-controls > strong {
+  display: block;
+  margin-top: 18px;
+}
+
+.avatar-controls > strong:first-child {
+  margin-top: 0;
+}
+
+.avatar-controls .dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: -2px;
+  border: 1px solid #ffffff55;
+}
+
+.avatar-controls .dot.rainbow {
+  background: conic-gradient(#ff5a5a, #ff9a3c, #ffe14d, #5bd37a, #4da3ff, #a77bff, #ff5a5a);
+}
+
+.avatar-controls .dot.none {
+  background: transparent;
+  border: 1px dashed #ffffff88;
+}
+
+.avatar-controls > div.eye-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
+}
+
+.avatar-controls > div.hair-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 8px;
+}
+
+.hair-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 6px;
+  font-size: 12px;
+}
+
+.hair-preview {
+  width: 62px;
+  height: 64px;
+  border-radius: 8px;
+  background: #0d1a27;
+}
+
+.eye-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 6px;
+  font-size: 12px;
+}
+
+.eye-preview {
+  width: 88px;
+  height: 36px;
+  border-radius: 6px;
+  background: #0d1a27;
+}
+
+.avatar-extra {
+  margin-top: 18px !important;
+}
+
+/* ───────── 사용 가능한 자산 · 계속 도는 코인 ───────── */
+.coin-spin {
+  position: relative;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+  perspective: 140px;
+  filter: drop-shadow(0 0 7px #f6c94566);
+}
+
+.coin-spin::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  width: 6px;
+  height: 6px;
+  background: #fff7c2;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  animation: coin-twinkle 1.6s ease-in-out infinite;
+}
+
+/* 코인이 들어가면서 좁아진 사이드바에서도 금액이 한 줄에 보이게 */
+.asset-mini strong {
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.coin {
+  position: absolute;
+  inset: 3px;
+  transform-style: preserve-3d;
+  animation: coin-spin 2.4s linear infinite;
+}
+
+.coin i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  font-style: normal;
+}
+
+.coin-rim {
+  background: #b9810f;
+  transform: translateZ(var(--z));
+}
+
+.coin-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 900 14px/1 "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  color: #9a6208;
+  text-shadow: 0 1px 0 #fff3a6;
+  background: radial-gradient(circle at 34% 28%, #fff6b0, #f6c945 48%, #d49a1a);
+  box-shadow: inset 0 0 0 2px #e0a820, inset 0 0 0 3px #fff0a0;
+  backface-visibility: hidden;
+}
+
+.coin-face.front {
+  transform: translateZ(3px);
+}
+
+.coin-face.back {
+  transform: rotateY(180deg) translateZ(3px);
+}
+
+@keyframes coin-spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes coin-twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* '동작 줄이기'를 켜면(.reduce-motion) 코인은 멈춘 채 앞면을 보여줘요 */
+.reduce-motion .coin {
+  transform: none;
+}
+
+/* ───────── 꾸미기 상점 ───────── */
+.avatar-tabs small {
+  opacity: .7;
+  margin-left: 2px;
+}
+
+.avatar-shop-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.avatar-item.on {
+  border-color: #81ddbb;
+  box-shadow: 0 0 0 1px #81ddbb inset;
+}
+
+.avatar-thumb {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 50% 35%, #1a3550, #0d1a27 75%);
+}
+
+/* ───────── 직업 아이콘 ───────── */
+.job-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  font-size: 22px;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  background: linear-gradient(145deg, var(--jc, #5b6b8a), color-mix(in srgb, var(--jc, #5b6b8a) 40%, #0a111b));
+  box-shadow: inset 0 0 0 1px #ffffff26, 0 4px 10px #0006;
+}
+
+.job-icon.big {
+  width: 48px;
+  height: 48px;
+  margin: 0 12px 0 0;
+  font-size: 27px;
+  vertical-align: middle;
+}
+
+.job-offer > .job-icon {
+  margin-bottom: 12px;
+}
+
+.job-chips .job-chip {
+  white-space: nowrap;
+}
+
+@media(max-width:650px) {
+  .avatar-profile .avatar-pixel {
+    width: 86px;
+    height: 107px;
+  }
+  .avatar-controls > div.eye-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .avatar-controls > div.hair-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .avatar-shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

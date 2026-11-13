@@ -1,0 +1,474 @@
+:root {
+  --paper: #0a111b;
+  --white: #142230;
+  --ink: #f2f7fa;
+  --muted: #b3c5d0;
+  --line: #395064;
+  --mint: #5bdac7;
+  --mintlight: #16443f;
+  --coral: #ff998d;
+  --yellow: #e7c66e;
+  --blue: #143a56;
+  --lilac: #342b4a;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+a {
+  color: #86d6f7;
+}
+
+small, .tiny, .scene p, .clock-caption, .journal-description {
+  color: var(--muted);
+}
+
+.top, .panel, .choice, .uni, .job-offer, .shop-item, .career, .subject, .life-card, .area, .major-option, dialog {
+  background: var(--white);
+  color: var(--ink);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.top {
+  border-bottom-color: var(--line);
+}
+
+button, select, input {
+  background: #203346;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+button:hover:not(:disabled), .choice:hover:not(:disabled), .subject:hover:not(:disabled) {
+  background: #294258;
+  border-color: var(--mint);
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline-color: #f7d372;
+}
+
+.primary {
+  background: #48bdab;
+  border-color: #48bdab;
+  color: #062520;
+}
+
+.primary:hover:not(:disabled) {
+  background: #77e8d5;
+  color: #062520;
+}
+
+.speed, .meter, .progress, .notice, .note, .waiting, .requirements, .asset-summary, .tasks, .two-col>div, .empty-journal, .decision-prompt, .course-audit, .readiness {
+  background: #192b3a;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.speed button.active, .term-slot.active {
+  background: #276b70;
+  color: #fff;
+  box-shadow: none;
+}
+
+.pill, .badge, .chips span {
+  background: #244840;
+  color: #d6ffef;
+}
+
+.badge {
+  background: #695420;
+  color: #ffebac;
+}
+
+.readiness {
+  border-color: #3d8178;
+}
+
+.ready-row.current {
+  background: #1b3c40;
+  padding: 8px;
+  border-radius: 9px;
+}
+
+.ready-row b, .salary, .tabs .active {
+  color: #8ee5d5;
+}
+
+.ready-row small, .readiness .pill {
+  background: #31584c;
+  color: #ddfff2;
+}
+
+.journey {
+  position: static;
+  top: auto;
+  z-index: auto;
+  backdrop-filter: none;
+  background: #142230;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tabs {
+  order: 0;
+}
+
+#content {
+  order: 1;
+}
+
+#journal {
+  order: 2;
+}
+
+#readiness {
+  order: 3;
+}
+
+#careerSection {
+  order: 4;
+}
+
+#journey {
+  order: 5;
+}
+
+footer {
+  order: 6;
+}
+
+.tabs .active {
+  border-bottom-color: #69deca;
+}
+
+.tabs button {
+  color: #bdd0da;
+}
+
+.choice {
+  box-shadow: none;
+  border-width: 2px;
+}
+
+.choice strong {
+  font-size: 16px;
+}
+
+.choice small {
+  font-size: 13px;
+  color: #d7e6ed;
+  line-height: 1.8;
+}
+
+.choice em {
+  color: #c7dcdb;
+  font-size: 12px;
+}
+
+.choice>b {
+  color: #87ddcb;
+}
+
+.field-grid .choice:nth-child(n) {
+  background: #182b3b;
+}
+
+.field-grid .choice:hover {
+  background: #294258;
+}
+
+.effect {
+  display: inline-block;
+  margin: 2px 3px 2px 0;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.effect.gain, .stat-delta.gain {
+  background: #173e5a;
+  color: #9ed9ff;
+}
+
+.effect.loss, .stat-delta.loss {
+  background: #59302f;
+  color: #ffb3aa;
+}
+
+.stat-delta {
+  display: inline-block;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 5px;
+  margin-left: 6px;
+}
+
+.stat {
+  grid-template-columns: 1fr auto auto;
+}
+
+.result-changes {
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #192b3a;
+}
+
+.result-changes strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.choice:disabled {
+  opacity: .75;
+  border-style: dashed;
+}
+
+.choice:disabled::after {
+  content: "컨디션 부족";
+  color: #ffc4bc;
+  font-size: 12px;
+}
+
+.term-slot:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.term-slot:disabled:hover {
+  background: #203346;
+}
+
+.last-prep-change {
+  font-size: 14px!important;
+}
+
+.filter-label select {
+  background: #203346;
+  color: #f2f7fa;
+}
+
+.career.locked {
+  background: #182430;
+  color: #b3c5d0;
+}
+
+.plus {
+  color: #9ed9ff;
+}
+
+.minus {
+  color: #ffb3aa;
+}
+
+.eyebrow {
+  color: #9bcabb;
+}
+
+.brand>span {
+  box-shadow: none;
+}
+
+.subject.selected, .major-option.selected, .area.met {
+  background: #1b403b;
+  border-color: #5bdac7;
+}
+
+.area.missing {
+  background: #462b2b;
+  border-color: #d57e70;
+}
+
+.outcome.success {
+  background: #1d493c;
+  color: #b3f9cf;
+}
+
+.outcome.failure {
+  background: #5a3030;
+  color: #ffc4bc;
+}
+
+.life-card.choice, .log.choice {
+  background: #1a3438;
+}
+
+.life-card.setback, .log.setback {
+  background: #38272a;
+}
+
+.life-card.achievement, .log.achievement {
+  background: #37371f;
+}
+
+.life-card:first-child {
+  background: #1e3441;
+  border-color: #5c899b;
+}
+
+.decision-prompt {
+  background: #1e3942;
+  border-color: #548f99;
+}
+
+.choice-dialog::backdrop, dialog::backdrop {
+  background: #020a13c9;
+  backdrop-filter: blur(4px);
+}
+
+.choice-dialog {
+  background: #11202f;
+}
+
+.choice-dialog .story-card {
+  background: transparent;
+}
+
+.choice-dialog-toolbar {
+  color: var(--muted);
+}
+
+.recovery-notice {
+  padding: 16px;
+  margin-top: 16px;
+  border: 1px solid #a8844f;
+  border-radius: 10px;
+  background: #403622;
+}
+
+.recovery-notice p {
+  margin: 5px 0 8px;
+}
+
+.timetable {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+  margin: 14px 0 20px;
+}
+
+.timetable section {
+  background: #1b2f40;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px;
+}
+
+.timetable h3 {
+  margin: 0 0 10px;
+}
+
+.term-slots {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 7px;
+}
+
+.term-slot {
+  min-height: 88px;
+  text-align: left;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.term-slot strong {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.term-slot small {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.term-slot.filled {
+  border-color: #5bdac7;
+}
+
+.course-search-label {
+  display: block;
+  font-weight: 700;
+  margin: 18px 0 10px;
+}
+
+.course-search-label input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.subject-grid .subject small {
+  font-size: 12px;
+  color: #c6d8e0;
+}
+
+.subject-grid .subject strong {
+  font-size: 14px;
+}
+
+body[data-field-group="공학"] {
+  --mint: #72c5fa;
+}
+
+body[data-field-group="자연과학"] {
+  --mint: #70dda5;
+}
+
+body[data-field-group="예술체육"] {
+  --mint: #f4a7d2;
+}
+
+body[data-field-group="교육"] {
+  --mint: #efd37d;
+}
+
+body[data-field-group="사회과학"] {
+  --mint: #c1a2ff;
+}
+
+body[data-field-group="인문"] {
+  --mint: #f4b38f;
+}
+
+@media(max-width:760px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    order: 0;
+  }
+  #sidebar {
+    order: 1;
+  }
+  .journey {
+    position: static;
+  }
+  .choice small {
+    font-size: 12px;
+  }
+  .timetable {
+    grid-template-columns: 1fr;
+  }
+  .term-slot {
+    min-height: 75px;
+  }
+  .choice-dialog {
+    max-height: 94vh;
+  }
+}

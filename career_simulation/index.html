@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a111b">
+  <script>try{var t=localStorage.getItem("next-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+  <meta name="description" content="선택이 쌓이는 진로 실험실. 고등학교에서 첫 일자리까지, 다른 가능성을 만나보세요.">
+  <title>다음 장 · 진로 실험실-</title>
+
+  <!-- =================================================================
+       스타일시트 (CSS) - 디자인 및 UI 스타일
+       ※ 디자이너/퍼블리셔 작업 영역 (css/ 폴더)
+       ※ 브라우저 렌더링 및 캐스케이딩(우선순위) 규칙에 따라 순서대로 로드됩니다.
+       ================================================================= -->
+  <!-- 1. 기본 테마, 컬러 시스템, 타이포그래피, 베이스 레이아웃 -->
+  <link rel="stylesheet" href="css/theme-v3.css">
+  <!-- 2. 반응형 2컬럼 레이아웃 및 저널 패널 스타일 -->
+  <link rel="stylesheet" href="css/journal-v4.css">
+  <!-- 3. v6 다크 테마 변수 및 공통 컴포넌트 스타일 -->
+  <link rel="stylesheet" href="css/experience-v6.css">
+  <!-- 4. 여정(타임라인) 패널 및 상태 표시 UI -->
+  <link rel="stylesheet" href="css/experience-v7.css">
+  <!-- 5. 아바타 프로필, 에디터 및 재화(자산) 피드백 -->
+  <link rel="stylesheet" href="css/experience-v8.css">
+  <!-- 6. 상단 고정 플로팅 바 및 저널 페이징 UI -->
+  <link rel="stylesheet" href="css/experience-v13.css">
+  <!-- 7. 수강신청 패널 및 과목 순서 안내 스타일 -->
+  <link rel="stylesheet" href="css/registration-v9.css">
+  <link rel="stylesheet" href="css/experience-v14.css">
+  <link rel="stylesheet" href="css/experience-v15.css">
+  <style>
+    .sg-planner{display:grid;gap:1rem}.sg-tabs{display:flex;flex-wrap:wrap;gap:.55rem}
+    .sg-tabs button.active{background:#44c7ae;color:#08202b;border-color:#44c7ae;font-weight:800}
+    .sg-summary{display:grid;gap:.3rem;position:sticky;top:.5rem;z-index:3;padding:1rem;border:1px solid #40bfae;border-radius:.8rem;background:#102b37;color:#e9fff9;box-shadow:0 .6rem 1.5rem #0005}
+    .sg-summary span{font-size:.85rem;color:#b3e5d8}.sg-term{border:1px solid #375466;border-radius:.8rem;padding:1rem;background:#142534;display:grid;gap:.8rem}
+    .sg-fixed,.sg-choice-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.45rem}
+    .sg-fixed>strong,.sg-choice-slots>strong{grid-column:1/-1;color:#a6efdd}
+    .sg-course,.sg-empty{padding:.7rem;border:1px solid #426071;border-radius:.55rem;display:flex;flex-direction:column;gap:.3rem;min-height:4.2rem}
+    .sg-course small{color:#bbd4dc}.sg-course.selected{border-color:#47c9ae;background:#193b41}.sg-empty{border-style:dashed;color:#b2c9d0;justify-content:center}
+    .sg-course button{align-self:flex-start;margin-top:.3rem}.sg-search-row{display:flex;gap:.7rem;flex-wrap:wrap}.sg-search-row label{display:grid;gap:.25rem;flex:1;min-width:180px}
+    .sg-search-row input,.sg-search-row select{width:100%;min-height:2.7rem;padding:.55rem;border:1px solid #4d6675;border-radius:.45rem;background:#0d1d29;color:#f5fbfd}
+    .sg-grid .subject[hidden]{display:none}.sg-grid .subject{scroll-margin-top:8rem}.sg-all-terms{display:grid;gap:.8rem}
+    .sg-stage-guide,.sg-stage-warning{border:1px solid #53cbb6;border-radius:.8rem;padding:.85rem 1rem;background:#12343a;display:grid;gap:.5rem}
+    .sg-stage-warning{border-color:#f2a35c;background:#3b2b28;color:#fff2e2}
+    .sg-stage-guide p,.sg-stage-warning p{margin:0}.sg-stage-steps{display:flex;flex-wrap:wrap;gap:.5rem}
+    .sg-stage-steps button{flex:1;min-width:135px;text-align:left;border:1px solid #658c91;border-radius:.55rem;padding:.55rem .75rem}
+    .sg-stage-steps button.done{border-color:#43c9a9;background:#1b4942;color:#e9fff9}
+    .tour-content{display:grid;gap:.85rem}.tour-content h1,.tour-content p{margin:.2rem 0}
+    .tour-map{display:grid;gap:.6rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tour-map div{padding:.8rem;border:1px solid #5e8190;border-radius:.7rem;background:#17303a}
+    .tour-map strong{display:block;color:#77ead2}.tour-map small{display:block;margin-top:.2rem}
+    .tour-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+    @media(max-width:600px){.sg-fixed,.sg-choice-slots{grid-template-columns:1fr 1fr}.sg-term{padding:.7rem}.sg-summary{top:0}.sg-course,.sg-empty{font-size:.85rem}}
+    @media(max-width:390px){.sg-fixed,.sg-choice-slots{grid-template-columns:1fr}}
+    html[data-theme="light"] .sg-summary{background:#e6f6f0;color:#15382e;box-shadow:0 .4rem 1rem #16362a22}
+    html[data-theme="light"] .sg-summary span{color:#315d52}
+    html[data-theme="light"] .sg-term{background:#f7fbf8;border-color:#a3c6bb;color:#1d3933}
+    html[data-theme="light"] .sg-course,html[data-theme="light"] .sg-empty{border-color:#a3c6bb}
+    html[data-theme="light"] .sg-course small,html[data-theme="light"] .sg-empty{color:#45665d}
+    html[data-theme="light"] .sg-course.selected{background:#e0f3eb}
+    html[data-theme="light"] .sg-search-row input,html[data-theme="light"] .sg-search-row select{background:#fff;color:#16382f;border-color:#a3c6bb}
+    html[data-theme="light"] .sg-stage-guide,html[data-theme="light"] .tour-map div{background:#e4f5ee;color:#183e36;border-color:#a3c6bb}
+    html[data-theme="light"] .sg-stage-warning{background:#fff1e4;color:#6e3611}
+    html[data-theme="light"] .sg-stage-steps button.done{background:#c9eee1;color:#173d32}
+    .tour-overlay{position:fixed;inset:0;z-index:10000}.tour-overlay[hidden]{display:none}
+    .tour-shade{position:absolute;background:rgba(3,11,20,.76)}
+    .tour-focus{position:absolute;box-sizing:border-box;border:3px solid #67f1cb;border-radius:.75rem;box-shadow:0 0 0 2px #fff9,0 0 28px #56f6c9;pointer-events:auto;animation:tourGlow 1.5s ease-in-out infinite alternate}
+    @keyframes tourGlow{to{box-shadow:0 0 0 5px #67f1cb80,0 0 40px #67f1cb}}
+    .tour-card{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:min(680px,calc(100vw - 24px));max-height:min(68vh,690px);overflow:auto;box-sizing:border-box;padding:1rem 1.2rem;border:2px solid #64dabe;border-radius:1rem;background:#10232f;color:#eefcf8;box-shadow:0 1rem 3rem #0009}
+    .tour-card.at-top{top:12px;bottom:auto}.tour-card h1{font-size:1.55rem;margin:.2rem 0}.tour-card p{margin:.3rem 0 .65rem;line-height:1.5}
+    .tour-impact{display:grid;gap:.3rem;padding:.65rem;border:1px solid #416877;border-radius:.65rem;background:#183644;font-size:.9rem}
+    .tour-impact span{display:block}.tour-impact strong{color:#7ee9d0}
+    .tour-preview{height:158px;overflow:hidden;border:1px solid #6b9b9d;border-radius:.65rem;background:#0b1822;position:relative}
+    .tour-preview iframe{display:block;width:800px;height:460px;border:0;transform-origin:top left;pointer-events:none}
+    .tour-caption{font-size:.78rem;color:#b4d4d4}.tour-actions{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.7rem}
+    @media(max-width:600px){.tour-card{padding:.75rem;max-height:66vh}.tour-card h1{font-size:1.2rem}.tour-preview{height:125px}.tour-impact{font-size:.82rem}}
+    @media(prefers-reduced-motion:reduce){.tour-focus{animation:none}}
+    html[data-theme="light"] .tour-card{background:#f8fffb;color:#17372f;border-color:#2c9e80}
+    html[data-theme="light"] .tour-impact{background:#e4f5ee;color:#17372f}
+  </style>
+</head>
+<body>
+  <!-- 상단 내비게이션 바 -->
+  <header class="top">
+    <a href="./" class="brand"><span>↗</span> 다음 장 <small>진로 실험실</small></a>
+    <div>
+      <label class="theme-switch" title="화면 밝기 모드 바꾸기">
+        <span class="ts-label">다크 모드</span>
+        <input type="checkbox" id="themeToggle" role="switch" aria-label="다크 모드 켜기/끄기" checked>
+        <span class="ts-track" aria-hidden="true"><span class="ts-text ts-on">ON</span><span class="ts-text ts-off">OFF</span><span class="ts-knob"><span class="ts-moon">🌙</span><span class="ts-sun">☀️</span></span></span>
+      </label>
+      <button data-action="help">이용 안내</button>
+      <button data-action="tour">화면 소개</button>
+      <button data-action="history">이전 플레이 기록</button>
+      <button data-action="restart">새로 시작 ↗</button>
+    </div>
+  </header>
+
+  <!-- 메인 레이아웃: 사이드바 + 메인 콘텐츠 -->
+  <div class="layout">
+    <aside id="sidebar"></aside>
+    <main>
+      <!-- 여정 요약 패널 -->
+      <section id="journey" class="panel journey"></section>
+
+      <!-- 탭 메뉴 (나의 이야기 / 활동 신청·자산 관리) -->
+      <nav class="tabs" aria-label="게임 메뉴">
+        <button data-action="tab" data-value="story">나의 이야기</button>
+        <button data-action="tab" data-value="shop">활동 신청·자산 관리</button>
+      </nav>
+
+      <!-- 핵심 진행 콘텐츠 영역 (선택지 및 이벤트) -->
+      <div id="content"></div>
+
+      <!-- 기록 저널 패널 -->
+      <section id="journal" class="panel journal"></section>
+
+      <!-- 준비도 현황 패널 -->
+      <section id="readiness" class="panel readiness"></section>
+
+      <!-- 직업 지도 및 상세 정보 패널 -->
+      <section id="careerSection" aria-label="직업 지도"></section>
+
+      <!-- 푸터 -->
+      <footer>
+        학과 정보는 어디가 공개 자료를 참고했습니다. 기록은 이 브라우저에만 저장됩니다.
+      </footer>
+    </main>
+  </div>
+
+  <!-- 사건 선택 팝업 모달 -->
+  <dialog id="choiceDialog" class="choice-dialog" aria-label="사건 선택">
+    <div class="choice-dialog-toolbar">
+      <span>선택과 결과를 확인하는 동안 시간은 멈춰요.</span>
+      <button data-action="hideDecision">기록 살펴보기 ↓</button>
+    </div>
+    <div id="choiceNotice" role="alert"></div>
+    <div id="choiceContent"></div>
+  </dialog>
+
+  <!-- 토스트 알림 메시지 -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- 공통 안내 및 팝업 모달 -->
+  <dialog id="dialog">
+    <button class="close" data-action="close" aria-label="닫기">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <!-- 학기 전환 및 회복 모달 -->
+  <dialog id="periodDialog" aria-label="학기 전환과 회복 안내" aria-modal="true">
+    <div id="periodContent"></div>
+  </dialog>
+
+  <div id="tourOverlay" class="tour-overlay" role="dialog" aria-modal="true" aria-label="화면 소개" hidden>
+    <div class="tour-shade" data-tour-shade="top"></div><div class="tour-shade" data-tour-shade="bottom"></div>
+    <div class="tour-shade" data-tour-shade="left"></div><div class="tour-shade" data-tour-shade="right"></div>
+    <div class="tour-focus" id="tourFocus" aria-hidden="true"></div>
+    <div class="tour-card" id="tourCard"></div>
+  </div>
+
+  <!-- =================================================================
+       스크립트 (JavaScript) - 프로세스 및 데이터
+       ※ 개발자/기획자 작업 영역 (js/ 폴더)
+       ※ 중요: 이 프로젝트는 기본 엔진(v3) 위에 상위 버전이 기능을 단계적으로
+         확장(Monkey-patching)하는 구조이므로, 반드시 아래 순서대로 로드되어야 합니다.
+       ================================================================= -->
+
+  <!-- [단계 1] 기본 게임 데이터셋 및 텍스트 리소스 -->
+  <script src="js/content-v3.js"></script>
+  <script src="js/daily-choices.js"></script>
+  <script src="js/quiz-v3.js"></script>
+  <script src="js/events-v3.js"></script>
+  <script src="js/majors-v4.js"></script>
+  <script src="js/journal-v4.js"></script>
+  <script src="js/curriculum-v5.js"></script>
+  <script src="js/careers-v5.js"></script>
+  <script src="js/copy-v5.js"></script>
+
+  <!-- [단계 2] 코어 게임 엔진 (상태 관리, 로컬 스토리지, 기본 렌더링) -->
+  <script src="js/game-v3.js"></script>
+
+  <!-- [단계 3] 기능 확장 및 시스템 패치 레이어 (v6 ~ v13 순차 적용) -->
+  <!-- v6: 신규 직업, 추가 퀴즈, 렌더링 파이프라인 1차 확장 -->
+  <script src="js/experience-v6.js"></script>
+  <!-- v7: 15개 계열별 역할 데이터셋 및 전용 사건 카탈로그 -->
+  <script src="js/role-events-v7.js?v=20261109"></script>
+  <!-- v7: 역할 선택 시스템, 실시간 시계, 여정 타임라인 패치 -->
+  <script src="js/experience-v7.js?v=20261109"></script>
+  <!-- v8: 어디가 공개자료 기반 실제 대학/학과 및 아바타/재화 데이터 -->
+  <script src="js/data-v8.js"></script>
+  <!-- v8: 자산/현금 시스템, 아바타 커스텀 에디터, 학점 감사 패치 -->
+  <script src="js/experience-v8.js"></script>
+  <!-- v9: 수강신청 과목 이수 순서 체계 및 플래너 패치 -->
+  <script src="js/registration-v9.js"></script>
+  <!-- v10~v11: 커리어넷 공공데이터 직업 프로필 연동 (1단계, 2단계) -->
+  <script src="js/careers-v10.js"></script>
+  <script src="js/careers-v11.js"></script>
+  <!-- v12: 75개 직업 커리어넷 공식 상세 데이터셋 (JSON) -->
+  <script src="js/career-source-v12.js"></script>
+  <!-- v12: 공식 데이터 기반 최종 직업 상세 렌더러 오버라이드 -->
+  <script src="js/careers-v12.js"></script>
+  <!-- v13: 저널 아카이브 페이징, 지출 이벤트 등 최신 인터랙션 최종 패치 -->
+  <script src="js/experience-v13.js"></script>
+  <script src="js/avatar-parts-v14.js"></script>
+  <script src="js/avatar-v14.js"></script>
+  <script src="js/job-icons-v14.js"></script>
+  <script src="js/theme-v15.js"></script>
+  <script src="js/recovery-v15.js"></script>
+  <!-- v14: 성광고 2026학년도 입학생 편제표 기반 3개 학년 수강신청 -->
+  <script src="js/registration-v14.js"></script>
+  <script src="js/feedback-v16.js?v=20261109-tour"></script>
+</body>
+</html>
